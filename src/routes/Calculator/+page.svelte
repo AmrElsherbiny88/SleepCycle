@@ -2,11 +2,11 @@
   import Cookies from 'js-cookie';
   import { onMount } from 'svelte';
 
-  let sleepTime = '';
-  let wakeUpTimes = [];
-  let currentCycle = '';
-  let history = [];
-  let suggestedWakeUpTimes = [];
+  let sleepTime = $state('');
+  let wakeUpTimes = $state([]);
+
+  let history = $state([]);
+  let suggestedWakeUpTimes = $state([]);
 
 
   $effect(() => {
