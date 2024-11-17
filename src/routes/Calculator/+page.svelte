@@ -7,7 +7,7 @@
 
   let history = $state([]);
   let suggestedWakeUpTimes = $state([]);
-  
+
   const to12HourFormat = (timeString) => {
     const [hours, minutes] = timeString.split(":").map(Number);
     const ampm = hours >= 12 ? "PM" : "AM";
@@ -31,7 +31,9 @@
     const savedHistory = Cookies.get("sleepCycles");
     history = savedHistory ? JSON.parse(savedHistory) : [];
     const savedSuggestedWakeUpTimes = Cookies.get("suggestedWakeUpTimes");
-    suggestedWakeUpTimes = savedSuggestedWakeUpTimes ? JSON.parse(savedSuggestedWakeUpTimes) : [];
+    suggestedWakeUpTimes = savedSuggestedWakeUpTimes
+      ? JSON.parse(savedSuggestedWakeUpTimes)
+      : [];
   });
 
   const calculateWakeTimes = () => {
@@ -41,7 +43,7 @@
     const sleep = new Date(`1970-01-01T${adjustedSleepTime}:00`);
     wakeUpTimes = [];
 
-    const currentDate = new Date().toLocaleDateString();  // Get the current date
+    const currentDate = new Date().toLocaleDateString();
 
     for (let i = 1; i <= 6; i++) {
       const wake = new Date(sleep.getTime() + i * 90 * 60000);
@@ -53,7 +55,11 @@
             : "Light → Deep → REM";
       const wakeTime = wake.toTimeString().slice(0, 5);
       const formattedWakeTime = to12HourFormat(wakeTime);
-      wakeUpTimes.push({time: formattedWakeTime, cycle: type, date: currentDate});
+      wakeUpTimes.push({
+        time: formattedWakeTime,
+        cycle: type,
+        date: currentDate,
+      });
     }
 
     suggestedWakeUpTimes = wakeUpTimes;
@@ -96,23 +102,21 @@
 
     <button
       class="bg-red-600 px-5 py-1 rounded-md mt-5 mb-5 hover:bg-red-950"
-      onclick={calculateWakeTimes}>Calculate</button>
+      onclick={calculateWakeTimes}>Calculate</button
+    >
   </div>
 
   {#if suggestedWakeUpTimes.length > 0}
-    <h2> Wake-Up Times</h2>
-    
+    <h2>Wake-Up Times</h2>
+
     <ul class="mt-5 mb-3">
       <span class="h4">Wake up at :</span>
       {#each suggestedWakeUpTimes as { time, cycle, date }}
         <li class="mt-2">
-         
           <span class="mt-5 h3">
-             <strong>{time}</strong> during <em>{cycle}</em>
+            <strong>{time}</strong> during <em>{cycle}</em>
           </span>
         </li>
-
-       
       {/each}
     </ul>
     <button
@@ -123,5 +127,4 @@
 </main>
 
 <style>
-  /* Your styles go here */
 </style>
