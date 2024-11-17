@@ -58,7 +58,7 @@
       Sleep Time:
       <input class="overflow-hidden border-none outline-none" type="time" bind:value={sleepTime} />
     </label>
-    <button class="bg-red-600 px-5 py-1 rounded-md mt-5 mb-5" onclick={calculateWakeTimes}>Calculate</button>
+    <button class="bg-red-600 px-5 py-1 rounded-md mt-5 mb-5 hover:bg-red-950" onclick={calculateWakeTimes}>Calculate</button>
   </div>
 
   {#if suggestedWakeUpTimes.length > 0}
@@ -70,7 +70,7 @@
         </li>
       {/each}
     </ul>
-    <button class="bg-red-600 px-5 py-1 rounded-md mt-5" onclick={wakeUp}>I Woke Up</button>
+    <button class="bg-red-600 px-5 py-1 rounded-md mt-5 hover:bg-red-950" onclick={wakeUp}>I Woke Up</button>
   {/if}
 
  
