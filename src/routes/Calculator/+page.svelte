@@ -47,62 +47,30 @@
 </script>
 
 <style>
-  .wake-time {
-    margin: 10px 0;
-  }
 
-  .history-entry {
-    margin-bottom: 1rem;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-
-  button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-
-  button:hover {
-    background-color: darkred;
-  }
-
-  .clear-button {
-    margin-top: 20px;
-    background-color: blue;
-  }
-
-  .clear-button:hover {
-    background-color: darkblue;
-  }
 </style>
 
 <main>
-  <h1>Sleep Cycle Calculator</h1>
+  <h1 class="h1 mb-5 mt-5">Sleep Cycle Calculator</h1>
 
   <div>
     <label>
       Sleep Time:
-      <input type="time" bind:value={sleepTime} />
+      <input class="overflow-hidden border-none outline-none" type="time" bind:value={sleepTime} />
     </label>
-    <button onclick={calculateWakeTimes}>Calculate</button>
+    <button class="bg-red-600 px-5 py-1 rounded-md mt-5 mb-5" onclick={calculateWakeTimes}>Calculate</button>
   </div>
 
   {#if suggestedWakeUpTimes.length > 0}
-    <h2>Suggested Wake-Up Times</h2>
-    <ul>
+    <h2> Wake-Up Times</h2>
+    <ul class="mt-5 mb-3">
       {#each suggestedWakeUpTimes as { time, cycle }}
-        <li class="wake-time">
-          Wake up at <strong>{time}</strong> during <em>{cycle}</em>
+        <li class="mt-2">
+       <span class="mt-5 h3">   Wake up at <strong>{time}</strong> during <em>{cycle}</em></span>
         </li>
       {/each}
     </ul>
-    <button onclick={wakeUp}>I Woke Up</button>
+    <button class="bg-red-600 px-5 py-1 rounded-md mt-5" onclick={wakeUp}>I Woke Up</button>
   {/if}
 
  
