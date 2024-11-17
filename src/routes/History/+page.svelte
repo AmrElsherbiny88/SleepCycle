@@ -1,12 +1,16 @@
 <script>
   import Cookies from "js-cookie";
-  import {onMount} from "svelte";
+  import { onMount } from "svelte";
 
   let history = [];
 
   onMount(() => {
     const savedHistory = Cookies.get("sleepCycles");
-    history = savedHistory ? JSON.parse(savedHistory) : [];
+    if (savedHistory) {
+      history = JSON.parse(savedHistory);
+      // ترتيب التاريخ بحيث يكون الأحدث في الأعلى
+      history.sort((a, b) => new Date(b.date) - new Date(a.date));
+    }
   });
 
   const deleteEntry = (index) => {
@@ -29,13 +33,13 @@
 
   {#if history.length > 0}
     <button
-    data-aos="fade-up"
+      data-aos="fade-up"
       class="bg-blue-600 px-5 py-1 rounded-md mt-10 mb-5 hover:bg-blue-950"
-      onclick={clearHistory}>Clear All History</button
-    >
+      onclick={clearHistory}>Clear All History</button>
   {/if}
 
-  {#each history.reverse() as { sleepTime, wakeUpTimes, date }, index}
+  <!-- عرض العناصر بحيث تكون الأحدث في الأعلى -->
+  {#each history as { sleepTime, wakeUpTimes, date }, index}
     <div data-aos="fade-right" class="history-entry mt-10">
       <p><strong>Date:</strong> {date}</p>
       <p class="h3"><strong>Sleep Time:</strong> {sleepTime}</p>
@@ -47,11 +51,11 @@
       </ul>
       <button
         class="bg-red-600 px-5 py-1 rounded-md mt-5 mb-5 hover:bg-red-950"
-        onclick={() => deleteEntry(index)}>Delete</button
-      >
+        onclick={() => deleteEntry(index)}>Delete</button>
     </div>
   {/each}
 </main>
 
 <style>
+  /* Your styles go here */
 </style>
