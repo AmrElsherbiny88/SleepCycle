@@ -1,12 +1,11 @@
 <script>
   import Cookies from "js-cookie";
 
-  let sleepTime = $state("");
-  let sleepPeriod = $state("PM");
-  let wakeUpTimes = $state([]);
-
-  let history = $state([]);
-  let suggestedWakeUpTimes = $state([]);
+  let sleepTime = $state(""); 
+  let sleepPeriod = $state("PM"); 
+  let wakeUpTimes = $state([]); 
+  let history = $state([]); 
+  let suggestedWakeUpTimes = $state([]); 
 
   const to12HourFormat = (timeString) => {
     const [hours, minutes] = timeString.split(":").map(Number);
@@ -17,14 +16,25 @@
   };
 
   const adjustSleepTime = () => {
+    if (!sleepTime) return null;
+
     const timeParts = sleepTime.split(":");
     let hours = parseInt(timeParts[0]);
-    if (sleepPeriod === "PM" && hours < 12) {
-      hours += 12;
-    } else if (sleepPeriod === "AM" && hours === 12) {
-      hours = 0;
+    const minutes = timeParts[1];
+
+    if (sleepPeriod === "AM") {
+     
+      if (hours === 12) {
+        hours = 0;
+      }
+    } else if (sleepPeriod === "PM") {
+  
+      if (hours < 12) {
+        hours += 12;
+      }
     }
-    return `${hours}:${timeParts[1]}`;
+
+    return `${hours}:${minutes}`;
   };
 
   $effect(() => {
@@ -40,9 +50,10 @@
     if (!sleepTime) return alert("Please enter a valid sleep time!");
 
     const adjustedSleepTime = adjustSleepTime();
+    if (!adjustedSleepTime) return alert("Sleep time is invalid!");
+
     const sleep = new Date(`1970-01-01T${adjustedSleepTime}:00`);
     wakeUpTimes = [];
-
     const currentDate = new Date().toLocaleDateString();
 
     for (let i = 1; i <= 6; i++) {
@@ -51,8 +62,8 @@
         i === 1
           ? "Light → Deep"
           : i === 6
-            ? "Light → REM"
-            : "Light → Deep → REM";
+          ? "Light → REM"
+          : "Light → Deep → REM";
       const wakeTime = wake.toTimeString().slice(0, 5);
       const formattedWakeTime = to12HourFormat(wakeTime);
       wakeUpTimes.push({
@@ -80,13 +91,10 @@
   };
 </script>
 
-
-
-
 <main>
-  <h1  class="h1 mb-5 mt-5">Sleep Cycle Calculator</h1>
+  <h1 class="h1 mb-5 mt-5">Sleep Cycle Calculator</h1>
 
-  <div >
+  <div>
     <label>
       Sleep Time:
       <input
@@ -105,16 +113,15 @@
 
     <button
       class="bg-red-600 px-5 py-1 rounded-md mt-5 mb-5 hover:bg-red-950"
-      onclick={calculateWakeTimes}>Calculate</button
-    >
+      onclick={calculateWakeTimes}>Calculate</button>
   </div>
 
   <section>
     {#if suggestedWakeUpTimes.length > 0}
-    <h2 >Wake-Up Times</h2>
+    <h2>Wake-Up Times</h2>
 
-    <ul  class="mt-5 mb-3">
-      <span class="h4">Wake up at :</span>
+    <ul class="mt-5 mb-3">
+      <span class="h4">Wake up at:</span>
       {#each suggestedWakeUpTimes as { time, cycle, date }}
         <li class="mt-2">
           <span class="mt-5 h3">
@@ -125,12 +132,11 @@
     </ul>
     <button
       class="bg-red-600 px-5 py-1 rounded-md mt-5 hover:bg-red-950"
-      onclick={wakeUp}>I Woke Up</button
-    >
-  {/if}
+      onclick={wakeUp}>I Woke Up</button>
+    {/if}
   </section>
-  
 </main>
 
 <style>
+
 </style>
