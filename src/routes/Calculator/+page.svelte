@@ -81,9 +81,9 @@
 </script>
 
 <main>
-  <h1 class="h1 mb-5 mt-5">Sleep Cycle Calculator</h1>
+  <h1 data-aos="fade-up" class="h1 mb-5 mt-5">Sleep Cycle Calculator</h1>
 
-  <div>
+  <div data-aos="fade-up">
     <label>
       Sleep Time:
       <input
@@ -106,10 +106,11 @@
     >
   </div>
 
-  {#if suggestedWakeUpTimes.length > 0}
-    <h2>Wake-Up Times</h2>
+  <section data-aos="fade-right">
+    {#if suggestedWakeUpTimes.length > 0}
+    <h2 >Wake-Up Times</h2>
 
-    <ul class="mt-5 mb-3">
+    <ul  class="mt-5 mb-3">
       <span class="h4">Wake up at :</span>
       {#each suggestedWakeUpTimes as { time, cycle, date }}
         <li class="mt-2">
@@ -124,6 +125,8 @@
       onclick={wakeUp}>I Woke Up</button
     >
   {/if}
+  </section>
+  
 </main>
 
 <style>
