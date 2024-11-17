@@ -1,6 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
- 
+    import {page} from "$app/stores";
 </script>
 
 
@@ -21,13 +21,20 @@
     
       <a class="hover:text-red-300 transition duration-200" href="#"
       onclick={()=>goto('/Calculator')}
+      class:active={$page.url.pathname === "/Calculator"}
         ><span>Calculator</span></a
       >
       <a class="hover:text-red-300 transition duration-200" href="#"
       onclick={()=>goto('/History')}
+      class:active={$page.url.pathname === "/History"}
         ><span>History</span></a
       >
 
     </div>
   </div>
 
+<style>
+     .active {
+    @apply variant-filled-primary px-3 rounded-md;
+  }
+</style>
