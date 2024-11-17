@@ -6,10 +6,10 @@
 
   
     <div
-    class="w-full bg-opacity-50 bg-black z-50  text-white flex items-center justify-center xl:justify-between pb-2 xl:px-10 pt-6 md:pt-4 xl:pt-2"
+    class="w-full bg-opacity-50 bg-black z-50 items-center text-white flex px-5 justify-between pb-2 xl:px-10 pt-6 md:pt-4 xl:pt-2 mb-5 mt-1" 
   >
    
-    <a class="hover:text-red-300 transition duration-200" href="https://amr-elsherbiny.vercel.app/"
+    <a class="hover:text-red-300 transition duration-200 h3" href="https://amr-elsherbiny.vercel.app/"
   
       ><span>AmrElsherbiny</span></a
     >
@@ -19,13 +19,13 @@
       class="text-center xl:gap-20 text-sm xl:text-2xl md:text-xl flex bg-black bg-opacity-5 justify-around gap-3"
     >
     
-      <a class="hover:text-red-300 transition duration-200" href="#Home"
+      <a class="hover:text-red-300 transition duration-200" href="#"
       onclick={()=>goto('/Calculator')}
-        ><span>Home</span></a
+        ><span>Calculator</span></a
       >
-      <a class="hover:text-red-300 transition duration-200" href="#Home"
+      <a class="hover:text-red-300 transition duration-200" href="#"
       onclick={()=>goto('/History')}
-        ><span>Home</span></a
+        ><span>History</span></a
       >
 
     </div>
