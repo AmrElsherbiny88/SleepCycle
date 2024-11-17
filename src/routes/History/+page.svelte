@@ -21,7 +21,7 @@
 </script>
 
 <main>
-  <h1 class="h1">Sleep Cycle History</h1>
+  <h1 data-aos="fade-up" class="h1">Sleep Cycle History</h1>
 
   {#if history.length === 0}
     <p class="mt-5">No history available.</p>
@@ -29,13 +29,14 @@
 
   {#if history.length > 0}
     <button
+    data-aos="fade-up"
       class="bg-blue-600 px-5 py-1 rounded-md mt-10 mb-5 hover:bg-blue-950"
       onclick={clearHistory}>Clear All History</button
     >
   {/if}
 
   {#each history.reverse() as { sleepTime, wakeUpTimes, date }, index}
-    <div class="history-entry mt-10">
+    <div data-aos="fade-right" class="history-entry mt-10">
       <p><strong>Date:</strong> {date}</p>
       <p class="h3"><strong>Sleep Time:</strong> {sleepTime}</p>
       <p class="mt-3 mb-3"><strong>Wake-Up Times:</strong></p>
