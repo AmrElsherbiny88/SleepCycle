@@ -80,10 +80,13 @@
   };
 </script>
 
-<main>
-  <h1 data-aos="fade-up" class="h1 mb-5 mt-5">Sleep Cycle Calculator</h1>
 
-  <div data-aos="fade-up">
+
+
+<main>
+  <h1  class="h1 mb-5 mt-5">Sleep Cycle Calculator</h1>
+
+  <div >
     <label>
       Sleep Time:
       <input
@@ -106,7 +109,7 @@
     >
   </div>
 
-  <section data-aos="fade-right">
+  <section>
     {#if suggestedWakeUpTimes.length > 0}
     <h2 >Wake-Up Times</h2>
 
